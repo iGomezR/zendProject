@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//ES" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" >
+
+    <?php
+    $titulo = "Listado de Salida de Cargamentos";
+    $labelDescripcion = "Proveedor/Nro. de orden de Entrada";
+    $labelsGrillas = array('Nro. de orden de Entrada','Proveedor','Analista','Fecha Registro','Tara Camion');
+    $apliGrillaJs = "/js/grillasmodulos/administrativo/gridOrdenDeSalida.js";   
+    $apliCssGeneral = "/css/cssmodulos/administrativo/OrdenDeSalida.css";
+    $apliJs = "/js/jsmodulos/administrativo/OrdenDeSalida.js";
+    $idCamposGrilla = array("id-registro","selectNro_orden_de_entrada","desc_proveedor",
+        'desc_usuario_analista','fecha_registro','tienefactura','tieneguia','peso_tara');
+
+    echo $this->headScript()->
+            appendFile($this->baseUrl() . "/js/jquery-1.7.1.js")->
+            appendFile($this->baseUrl() . "/js/jquery-ui-1.8.17.custom.min.js")->
+            appendFile($this->baseUrl() . '/js/i18n/grid.locale-es.js')->
+            appendFile($this->baseUrl() . '/js/jquery.jqGrid.min.js')->
+            appendFile($this->baseUrl() . "/js/bootstrap.js")->
+            appendFile($this->baseUrl() . $apliJs)->
+            appendFile($this->baseUrl() . $apliGrillaJs)->
+            appendFile($this->baseUrl() . "/js/jquery.tablescroll.js")->
+            appendFile($this->baseUrl() . "/js/jquery.blockUI.js");
+
+    echo $this->headLink()
+            ->setIndent('  ')
+            ->prependStylesheet($this->baseUrl() . "/css/ui.datepicker.css")
+            ->prependStylesheet($this->baseUrl() . "/css/bootstrap.css")
+            ->prependStylesheet($this->baseUrl() . "/css/jquery-ui-1.8.17.custom.css")
+            ->prependStylesheet($this->baseUrl() . "/css/bootstrap.css")
+            ->prependStylesheet($this->baseUrl() . "/css/ui.jqgrid.css")
+           // ->prependStylesheet($this->baseUrl() . $apliCss)
+            ->prependStylesheet($this->baseUrl() . $apliCssGeneral)
+            ->prependStylesheet($this->baseUrl() . "/css/contenedor.css");
+    ?>
+
+    <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
+
+        <body>
+            <CENTER>
+
+                <div class="modal hide fade in" id="modalEditar">
+                    <div class="modal-header">
+                        <button data-dismiss="modal" class="close" type="button" id="cerrar-bot">X</button>
+                        <div id="cabeceraModal" class="btn btn-info">
+                            <h3 id="editar-nuevo"></h3>
+                        </div>
+
+                        <div class="alert alert-block hide" id="warning-block-registro">
+                            <div id="warning-message-registro"></div>
+                        </div>
+                        <div class="alert alert-success hide" id="success-block-registro">
+                            Los datos han sido almacenados exitosamente
+                        </div>
+                        <div class="alert alert-error hide" id="error-block-modal">
+                        </div>
+                        <div class="alert alert-success hide" id="limpiar-block"></div>
+                    </div>
+
+                    <div class="modal-body">                    
+                        <div id="contenedor-modal">
+                            <table>
+                                <!-- AGREGAR CAMPOS AQUI-->                               
+                                <input type="hidden" id="<?php echo $idCamposGrilla[0]?>"></input>
+                                <input type="hidden" id="auxiliar"></input>
+                                <input type="hidden" id="accion"></input>
+                                <tr>
+                                    <td>
+                                        <label for="<?php echo $idCamposGrilla[1]?>" id="<?php echo $idCamposGrilla[1].'-idioma'?>"><?php echo $labelsGrillas[0] ?><font style="color: red;">(*)</font></label>
+                                    </td>
+                                    <td>
+                                        <select  name="<?php echo $idCamposGrilla[1]?>" id="<?php echo $idCamposGrilla[1]?>" onchange=""  style="width:100px;">
+                                               <option value="-1">Seleccione</option>
+                                       </select>
+                                    </td>
+                                    <td>
+                                        <label for="<?php echo $idCamposGrilla[2]?>" id="<?php echo $idCamposGrilla[2].'-idioma'?>"><?php echo $labelsGrillas[1] ?><font style="color: red;">(*)</font></label>
+                                    </td>                                    
+                                    <td>
+                                        <input readonly="" id="<?php echo $idCamposGrilla[2]?>" maxlength="50" style="width:150px;" ></input>
+                                    </td>
+                                    <td>
+                                        <label for="<?php echo $idCamposGrilla[3]?>" id="<?php echo $idCamposGrilla[3].'-idioma'?>"><?php echo $labelsGrillas[2] ?><font style="color: red;">(*)</font></label>
+                                    </td>                                    
+                                    <td>
+                                        <input readonly="" id="<?php echo $idCamposGrilla[3]?>" maxlength="50" style="width:150px;" ></input>
+                                    </td>                                   
+                                    <td>
+                                        <label for="<?php echo $idCamposGrilla[4]?>" id="<?php echo $idCamposGrilla[4].'-idioma'?>"><?php echo $labelsGrillas[3] ?><font style="color: red;">(*)</font></label>
+                                    </td>                                    
+                                    <td>
+                                        <input readonly="" id="<?php echo $idCamposGrilla[4]?>" maxlength="50" style="width:150px;" ></input>
+                                    </td>                                     
+                                    <td><a id="addDetalle" data-toggle="modal"><img src="<?= $this->baseUrl() . "/css/images/add.png"; ?>" id="nuevo-img" title="Guardar Analisis"  style="cursor: hand;"/></a></td>                                    
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="<?php echo $idCamposGrilla[7]?>" id="<?php echo $idCamposGrilla[7].'-idioma'?>"><?php echo $labelsGrillas[4] ?><font style="color: red;">(*)</font></label>
+                                    </td>                                    
+                                    <td>
+                                        <input id="<?php echo $idCamposGrilla[7]?>" maxlength="50" style="width:150px;" ></input>
+                                    </td>                                     
+                                    <td>
+                                        <label for="label-factura" id="label-factura-idioma">Tiene Factura<font style="color: red;">(*)</font></label>
+                                        <input type="radio" name="<?php echo $idCamposGrilla[5]?>" value="Si"> Si</input>
+                                        <input type="radio" name="<?php echo $idCamposGrilla[5]?>" value="No"> No</input>
+                                    </td>
+                                    <td>
+                                        <label for="label-guia" id="label-guia-idioma">Tiene Guia de Translado<font style="color: red;">(*)</font></label>
+                                        <input type="radio" name="<?php echo $idCamposGrilla[6]?>" value="Si"> Si
+                                        <input type="radio" name="<?php echo $idCamposGrilla[6]?>" value="No"> No
+                                    </td>                                                                           
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div id="divDatosFactura">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <label for="numero_factura-label" id="numero_factura-label">Numero de Factura<font style="color: red;">(*)</font></label>
+                                                    </td>
+                                                    <td>
+                                                        <input id="numero_factura" maxlength="50" style="width:150px;" ></input>
+                                                    </td>  
+                                                    <td>
+                                                        <label for="monto_factura-label" id="monto_factura-label">Monto Factura<font style="color: red;">(*)</font></label>
+                                                    </td>
+                                                    <td>
+                                                        <input id="monto_factura" maxlength="50" style="width:150px;" ></input>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+  
+                        <div id="divDatosDetalle">
+                            <div class="modal-header">
+                                 <div id="divTitleDescuentos" class="btn btn-info">
+                                     <h5 id="labelDescuentos"></h5>
+                                 </div>
+                            </div>                                                   
+                            <div id="contenedor-grid" class="contenedor-grid">
+                                <!-- Aca se pone la grilla para el modal-->
+                                <table id="grillaDetalleModal"></table>
+                                <div id="paginadorDetalleModal"></div>
+                            </div>                            
+                        </div>  
+                        <div id="contenedor-modal" >
+                            <strong><font style="color: red;">(*)</font> Complete los campos marcados en el formulario para guardar el Registro</strong>
+                        </div>                      
+                    </div>
+                   
+                    <div class="modal-footer">
+                        <a data-dismiss="modal" class="btn" href="#" id="cancelar-bot">Cancelar</a>
+                        <a class="btn btn-info" id="guardar-registro" href="#">Guardar</a>
+                    </div>
+                </div>
+
+                <div class="container-fluid">
+                    <div class="row-fluid">
+                        <div class="span10" id="span10">
+                            <br>
+                                <div id="cabeceraFormulario" class="btn btn-info" >
+                                    <h1 id="cabecera-titulo" align="center" ><?php echo $titulo ?></h1>
+
+                                    <div class="alert alert-block hide" id="warning-block-registro-listado">
+                                        <div id="warning-message-registro-listado"></div>
+                                    </div>
+
+                                    <div class="alert alert-success hide" id="success-block-registro-listado">
+                                        <div id="success-message-registro-listado"></div>
+                                    </div>
+
+                                    <div class="alert alert-error hide" id="error-block-registro-listado">
+                                    </div>
+
+                                    <div class="alert alert-info hide" id="info-block-listado">
+                                        <div id="info-message"></div>
+                                    </div>
+
+
+
+                                </div>
+                                <div  id="clientes-div">
+                                    <div id="contenedor">
+                                        <fieldset>
+                                            <table border="0">
+                                                <tr>
+                                                    <td><label for="nombreBusqueda" id="nombreBusqueda-idioma"><?php echo $labelDescripcion ?></label></td>
+                                                    <td><input id="descripcionBusqueda" maxlength="50" onkeypress='return validarNumerosLetrasPorcentageEspacio(event);'></input></td>
+                                                </tr>
+                                            </table>
+                                        </fieldset>
+
+                                    </div>
+                                </div>
+                                <div  id="tab-content">
+                                    <div id="contenedor" >
+                                        <a id="buscarregistro"  class="btn btn-info"><img src="<?= $this->baseUrl() . "/css/images/buscar.png"; ?>" id="buscar-img" title="Buscar"  style="cursor: hand;"/></a>
+                                        <a id="nuevoregistro"  class="btn btn-info"  data-toggle="modal"><img src="<?= $this->baseUrl() . "/css/images/nuevo.png"; ?>" id="nuevo-img" title="Nuevo"  style="cursor: hand;"/></a>
+                                    </div>
+                                </div>
+                                <div id="contenedor">
+                                    <fieldset>
+                                        <table border="0">
+                                            <tr>
+                                                <td>
+                                                    <div class="tab-content" id="tab-content">
+                                                        <!-- DATOS DE IMPUESTOS --->
+                                                        <div id="grillaPaginadorRegistro">
+                                                            <table id="grillaRegistro"></table>
+                                                            <div id="paginadorRegistro"></div>
+                                                        </div>
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </fieldset>
+                                </div>
+
+                        </div>
+                    </div>
+                </div>
+            </CENTER>
+        </body>
+    </html>

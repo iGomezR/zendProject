@@ -1,0 +1,55 @@
+/* CSS para menu preferencias */
+/*-------------- CUERPO, CABECERA Y FOOTER ------------------------*/
+body
+{
+	background:  url(../images/backs/back_body_preferencias.jpg);
+}
+div#sub_cabecera {
+	background-image:url(../images/backs/back_sub_preferencias.jpg);
+}
+div#sub_cabecera a {
+	color: #7E7218;
+	text-decoration: none;
+}
+div#sub_cabecera a:hover {
+	color: black;
+}
+
+/*---------------------- PREFERENCIAS ------------------------ */
+
+div .clip
+{
+	/* background-color: #fac834; */
+	background-color: #FFC822;
+	border: 1px solid #FFC822;
+}
+div .clip a
+{
+	color: #855A03;
+}
+div .clip a:hover
+{
+	color: black;
+}
+
+div .clip ul li
+{
+	background-image: url(../images/backs/li_clips_preferencias.gif);	
+}
+div .clip ul ul
+{
+	border-color: #af8b23;
+}
+
+div#path_preferencias
+{
+	background-color: #ffea7f;
+	background-image: url(C:/resin-2.1.9-g9/doc/images/lo2_gfx/background/background_path_preferencias.jpg);
+	background-repeat: repeat-x;
+	float: left;
+	width: 100%;
+	color: #937200;
+	margin-right: -3px;
+	
+}
+/*-------------- fin preferencias    -------------------*/

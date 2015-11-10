@@ -1,0 +1,93 @@
+@CHARSET "ISO-8859-1";
+
+body{font: 76% Arial, sans-serif;}
+#contenedor{width:950px;padding:5px 0;border: 2px solid #C6E9FF;
+border-color: #BCE8F1;
+background: #D9EDF7;}
+
+#cabeceraFormulario,#cabeceraModal, #cabeceraFormularioTip {width:950px;padding:5px 0;border: 2px solid #C6E9FF;
+border-color: #BCE8F1;
+background: #49AFCD;
+color:white}
+
+fieldset{border: 0px solid #000;}
+legend{font: bold 140% Arial,sans-serif;color: #27518A;}
+div.medidas,div.check{margin: 10px 0 10px 10px;}
+div.medidas label{float:left;}
+div.medidas input{width:120px;}
+
+#selectizq,#selectder {
+   display: block;  
+   border: 1px solid #aaa;  
+   text-decoration: none;  
+   background-color: #fafafa;  
+   color: #123456;  
+   margin: 2px;  
+   clear:both;  
+  }  
+  #selectizq,#selectder {  
+   float:left;  
+   text-align: center;  
+   margin: 10px;
+  }  
+  #select1,#select2 {  
+   width: 150px;  
+   height: 150px;  
+  }  
+  
+div#contenedor-jerarquia { color: blue; width: 100%; height: 300px; padding:10px;margin: 0 0 0 0; }
+div#contenedor-jerarquia label {color:#49AFCD;font-weight: bold;text-decoration: none; text-align:left;width:150px; }
+
+div#contenedor-jerarquia-modal { color: blue; width: 100%; height: 200px; padding:10px;margin: 0 0 0 0; }
+div#contenedor-jerarquia-modal label {color:#49AFCD;font-weight: bold;text-decoration: none; text-align:left;}
+
+ul#menu_arbol,ul#menu_arbol_modal, ul#menu_arbol ul,ul#menu_arbol_modal ul {
+	list-style-type: none;
+	background:   url(/css/images/linea_vertical.gif) repeat-y;
+}
+ul#menu_arbol li {
+	padding: 0 10px;
+	background: url(/css/images/cierre.gif) no-repeat;
+}
+	
+ul#menu_arbol li.cierre {
+	background: url(/css/images/cierre.gif) left top no-repeat;
+}
+		
+ul#menu_arbol ul {
+	margin-left: 5px;
+	color:blue;
+}
+
+/* estilo para lo q este dentro de la ventana modal */
+.moda {
+	display: none;
+    position: absolute;
+    top: 1%;
+    border: 1px solid black; 
+    left: 5%;
+    width: 1000px;
+    height: 550px;
+    padding: 0px;
+    background: #fff;
+	color: #333;
+    z-index:1002;
+    overflow: auto;
+}
+
+.formularioTipoProducto {
+	display: none;
+    position: absolute;
+    top: 1%;
+    border: 1px solid black; 
+    left: 25%;
+    width: 600px;
+    height: 530px;
+    padding: 0px;
+    background: #fff;
+	color: #333;
+    z-index:1002;
+    overflow: auto;
+}
+	
+  

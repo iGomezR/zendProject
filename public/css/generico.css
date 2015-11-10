@@ -1,0 +1,25 @@
+td.linkjqgrid A:link {text-decoration: none;}
+td.linkjqgrid A:visited {text-decoration: none;}
+td.linkjqgrid A:active {text-decoration: none;}
+td.linkjqgrid A:hover {text-decoration: underline; color: blue; cursor: pointer;}
+td.linkjqgrid {background-color:#BCE8F1}
+
+.formularioVer{
+	display: none;
+    position: absolute;
+    top: 15%;
+    border: 1px solid black; 
+    right: 5%;
+    width: 500px;
+    height: 280px;
+    padding: 0px;
+    background: #fff;
+	color: #333;
+    z-index:1002;
+    overflow: auto;
+}
+
+#grillaVended {
+    font-size: 0.8em;
+}
+

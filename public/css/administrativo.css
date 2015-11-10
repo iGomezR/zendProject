@@ -1,0 +1,60 @@
+/* CSS para menu administrativo */
+/*-------------- CUERPO, CABECERA Y FOOTER ------------------------*/
+body
+{
+	background: url(../images/backs/back_body_administrativo.jpg);
+}
+div#sub_cabecera { 
+	background-image:url(../images/backs/back_sub_administrativo.jpg);
+}
+div#sub_cabecera a {
+	color: white;
+	text-decoration: none;
+}
+div#sub_cabecera a:hover {
+	color: #095b77;
+}
+/* -------------------   ADMINISTRATIVO   ------------------------------ */
+.titulo
+{
+	color: #222222;
+}
+
+div .clip
+{
+	background-color: #49baed;
+	border: 1px solid #49baed;
+}
+
+div .clip ul ul
+{
+	border-left-color: #2a789c;
+}
+div .clip ul li
+{
+	background-image: url(../images/backs/li_clips.gif);
+}
+div .clip a
+{
+	color: #0A3981;
+}
+div .clip a:hover
+{
+	color: white;
+}
+
+div#path_administrativo
+{
+	color: #343e4c;
+	background-color: #91dfff;
+	/* background-image:  url(C:/resin-2.1.9-g9/doc/images/lo2_gfx/background/background_path_administrativo.jpg); */
+	background-repeat: repeat-x;
+	padding-left: 17px;
+	float: left;
+	width: 100%;
+	margin-right: -3px;
+}
+
+/* ------- fin administrativo ----------- */ 
+
+

@@ -1,0 +1,60 @@
+root {
+    display: block;
+}
+
+td.linkjqgrid A:link {text-decoration: none;}
+td.linkjqgrid A:visited {text-decoration: none;}
+td.linkjqgrid A:active {text-decoration: none;}
+td.linkjqgrid A:hover {text-decoration: underline; color: blue; cursor: pointer;}
+td.linkjqgrid {background-color:#BCE8F1}
+
+#span10 {
+    width: 100%;
+}
+
+#modalEditar{
+    width:1100px;
+    /*height:1100px;*/
+    margin-left:-500px;  
+    margin: -330px 0 0 -500px;
+}
+
+#cabeceraModal{
+ width: 100%;
+ /*width:750px*/;
+ color:white;
+}
+
+#editar-nuevo{
+    color:white;
+}
+
+#contenedor-modal{
+    /*width: 100%;*/
+    width:980px;
+    padding:5px 0;
+    border: 2px solid #C6E9FF;
+    border-color: #BCE8F1;
+    background: #D9EDF7;
+}
+
+#cabeceraFormulario {
+    width: 100%;
+}
+
+#cabecera-titulo {       
+       margin-bottom: 20px;
+       color:white;
+}
+
+#contenedor {
+   width: 100%;
+}
+
+#descripcionBusqueda{
+    width:300px;
+}
+
+.modal-body {
+  padding: 155px;
+}
