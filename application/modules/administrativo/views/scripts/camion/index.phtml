@@ -1,72 +1,79 @@
-<?php 
-$titulo = "Listado de Camiones";
-    $labelDescripcion = "Busqueda por Proveedor/Marca/Modelo/Anho/Peso Neto/Chapa";
-    $labelsGrillas = array('Proveedor','Marca','Modelo','Anho','Peso Neto','Chapa');
-   
-    $idCamposGrilla = array("id-registro","selectProveedor","marca_camion","modelo_camion","anho_camion","peso_neto_camion","chapa_camion");
-?>
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span10" id="span10">
-            <br>
-                <div id="cabeceraFormulario" class="btn btn-info" >
-                    <h1 id="cabecera-titulo" align="center" ><?php echo $titulo ?></h1>
-
-                    <div class="alert alert-block hide" id="warning-block-registro-listado">
-                        <div id="warning-message-registro-listado"></div>
-                    </div>
-
-                    <div class="alert alert-success hide" id="success-block-registro-listado">
-                        <div id="success-message-registro-listado"></div>
-                    </div>
-
-                    <div class="alert alert-error hide" id="error-block-registro-listado">
-                    </div>
-
-                    <div class="alert alert-info hide" id="info-block-listado">
-                        <div id="info-message"></div>
-                    </div>
-
-
-
-                </div>
-                <div  id="clientes-div">
-                    <div id="contenedor" >
-                        <fieldset>
-                            <table border="0">
-                                <tr>
-                                    <td><label for="descripcionBusqueda" id="descripcionBusqueda-idioma"><?php echo $labelDescripcion ?></label></td>
-                                    <td><input id="descripcionBusqueda" maxlength="50"  onkeypress='return validarNumerosLetrasPorcentageEspacio(event);'></input></td>
-                                </tr>
-                            </table>
-                        </fieldset>
-
-                </div>
-            </div>
-            <div  id="tab-content">
-                <div id="contenedor" >
-                    <a id="buscarregistro"  class="btn btn-info"><img src="<?= $this->baseUrl() . "/css/images/buscar.png"; ?>" id="buscar-img" title="Buscar"  style="cursor: hand;"/></a>
-                    <a id="nuevoregistro"  class="btn btn-info"  data-toggle="modal"><img src="<?= $this->baseUrl() . "/css/images/nuevo.png"; ?>" id="nuevo-img" title="Nuevo"  style="cursor: hand;"/></a>
-                </div>
-            </div>
-            <div id="contenedor" >
-                <fieldset>
-                    <table border="0">
-                        <tr>
-                            <td>
-                                <div class="tab-content" id="tab-content">
-                                    <div id="grillaPaginadorRegistro">
-                                        <table id="grillaRegistro"></table>
-                                        <div id="paginadorRegistro"></div>
-                                    </div>
-
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </fieldset>
-            </div>
-
-    </div>
+<header class="text-center">
+	<h3>Camión </h3>	
+</header>
+<div class="col-lg-12">
+	<div class="col-lg-6">
+		<div class="form-group">
+            <label for="query" class="control-label">Search: </label>
+            <input class="form-control" name="query" id="query-1" placeholder="Start typing something to search..." type="text">              
+        </div>
+	</div>
+	<div class="col-lg-6">
+		<div class="form-group">
+            <label for="query" class="control-label">Search3: </label>
+            <input class="form-control" name="query" id="query-2" placeholder="Start typing something to search..." type="text">              
+        </div>
+	</div>
 </div>
+<div class="col-lg-12">
+	<div class="col-lg-6">
+		<div class="control-group">
+			<div class="form-group">
+		        <label for="single" class="control-label">Select2 single select spans</label>
+		       
+		          <select id="span_1" class="select2 form-control">
+		            <option></option>
+		            <option value="A">HOLA OPCION 1 </option>
+		            <option value="B">HOLA OPCION 2 </option>
+		            <option value="C">HOLA OPCION 4 </option>
+		          </select>
+		    </div>      
+	    </div>      
+    </div>      
 </div>
+<div class="col-lg-12">
+	<div class="col-lg-6">
+		<div class="control-group">
+			<div class="form-group">
+				<label for="single" class="control-label">Date</label>
+                <input id="datetimepicker" type="text" class="form-control">
+            </div>     
+    	</div> 
+	</div> 
+    <div class="col-lg-6">
+		<div class="control-group">
+			<div class="form-group">
+				<label for="single" class="control-label">Date</label>
+                <input id="datetimepicker" type="text" class="form-control">
+            </div>     
+        </div>     
+    </div>      
+</div>
+<style type="text/css">
+	.twitter-typeahead, .tt-hint, .tt-input, .tt-menu { width: 100%; }
+</style>
+
+<script type="text/javascript" 
+	src="<?php echo $this->baseUrl(). "/js/bootstrap3-typeahead.js"?>">
+</script>
+<script type="text/javascript">
+
+
+$('#query-1').typeahead({        
+        local: ['alpha','allpha2','alpha3','bravo','charlie','delta','epsilon','gamma','zulu']
+});
+$('#query-2').typeahead({        
+        local: ['alpha','allpha2','alpha3','bravo','charlie','delta','epsilon','gamma','zulu']
+});                                                                                                      
+$('.tt-query').css('background-color','#fff');     
+
+ $('.select2').select2({ placeholder : '' });
+
+  $('.select2-remote').select2({ data: [{id:'A', text:'A'}]});
+
+  $('button[data-select2-open]').click(function(){
+    $('#' + $(this).data('select2-open')).select2('open');
+  });
+
+  jQuery('#datetimepicker').datetimepicker();
+</script>

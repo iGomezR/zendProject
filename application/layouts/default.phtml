@@ -1,113 +1,96 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//ES" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" >
-
-    <?php
-     $apliGrillaJs = "/js/grillasmodulos/administrativo/gridCamion.js";
-    $apliCss = "/css/cssmodulos/administrativo/Camion.css";
-    $apliCssGeneral = "/css/cssmodulos/CssGeneral.css";
-    $apliJs = "/js/jsmodulos/administrativo/Camion.js";
-
-    echo $this->headScript()->
-            appendFile($this->baseUrl() . "/js/jquery-1.7.1.js")->
-            appendFile($this->baseUrl() . "/js/jquery-ui-1.8.17.custom.min.js")->
-            appendFile($this->baseUrl() . '/js/i18n/grid.locale-es.js')->
-            appendFile($this->baseUrl() . '/js/jquery.jqGrid.min.js')->
-            appendFile($this->baseUrl() . "/js/bootstrap.js")->
-            appendFile($this->baseUrl() . $apliJs)->
-            appendFile($this->baseUrl() . $apliGrillaJs)->
-            appendFile($this->baseUrl() . "/js/jquery.tablescroll.js")->
-            appendFile($this->baseUrl() . "/js/jquery.blockUI.js");
-
-    echo $this->headLink()
-            ->setIndent('  ')
-            ->prependStylesheet($this->baseUrl() . "/css/ui.datepicker.css")
-            ->prependStylesheet($this->baseUrl() . "/css/bootstrap.css")
-            ->prependStylesheet($this->baseUrl() . "/css/jquery-ui-1.8.17.custom.css")
-            ->prependStylesheet($this->baseUrl() . "/css/bootstrap.css")
-            ->prependStylesheet($this->baseUrl() . "/css/ui.jqgrid.css")
-            ->prependStylesheet($this->baseUrl() . $apliCss)
-            ->prependStylesheet($this->baseUrl() . $apliCssGeneral)
-            ->prependStylesheet($this->baseUrl() . "/css/contenedor.css");
-    ?>
-
-    <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
-
-        <body>
-            <CENTER>
-
-                <div class="modal hide fade in" id="modalEditar">
-                    <div class="modal-header">
-                        <button data-dismiss="modal" class="close" type="button" id="cerrar-bot"><font style="color: red;">X</font></button>
-                        <div id="cabeceraModal" class="btn btn-info" >
-                            <h3 id="editar-nuevo"></h3>
-                        </div>
-
-                        <div class="alert alert-block hide" id="warning-block-registro">
-                            <div id="warning-message-registro"></div>
-                        </div>
-                        <div class="alert alert-success hide" id="success-block-registro">
-                            Los datos han sido almacenados exitosamente
-                        </div>
-                        <div class="alert alert-error hide" id="error-block-modal">
-                        </div>
-                        <div class="alert alert-success hide" id="limpiar-block"></div>
-
-
-                    </div>
-
-                    <div class="modal-body">
-                        <div id="contenedor-modal" >
-                            <table>
-                                <!-- AGREGAR CAMPOS AQUI-->
-                                <input type="hidden" id="<?php echo $idCamposGrilla[0]?>"></input>
-                                <tr>
-                                    <td>
-                                        <label for="<?php echo $idCamposGrilla[1]?>" id="<?php echo $idCamposGrilla[1].'-idioma'?>"><?php echo $labelsGrillas[0] ?><font style="color: red;">(*)</font></label>
-                                    </td>
-                                    <td>
-                                        <select  name="<?php echo $idCamposGrilla[1]?>" id="<?php echo $idCamposGrilla[1]?>" onchange=""  style="width:150px;">
-                                               <option value="-1">Seleccione</option>
-                                       </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><label for="<?php echo $idCamposGrilla[2]?>" id="<?php echo $idCamposGrilla[2].'-idioma'?>"><?php echo $labelsGrillas[1] ?><font style="color: red;">(*)</font></label></td>
-                                    <td><input id="<?php echo $idCamposGrilla[2]?>" maxlength="50" style="width:150px;" ></input></td>
-                                </tr>
-                                <tr>
-                                    <td><label for="<?php echo $idCamposGrilla[3]?>" id="<?php echo $idCamposGrilla[3].'-idioma'?>"><?php echo $labelsGrillas[2] ?><font style="color: red;">(*)</font></label></td>
-                                    <td>
-                                        <input type="text" id="<?php echo $idCamposGrilla[3]?>" maxlength="19" style="width:150px;"  ></input>                                        
-                                    </td>
-                                </tr>                              
-                                <tr>
-                                    <td><label for="<?php echo $idCamposGrilla[4]?>" id="<?php echo $idCamposGrilla[4].'-idioma'?>"><?php echo $labelsGrillas[3] ?><font style="color: red;">(*)</font></label></td>
-                                    <td><input id="<?php echo $idCamposGrilla[4]?>" maxlength="4" style="width:150px;"  ></input></td>
-                                </tr>
-                                <tr>
-                                    <td><label for="<?php echo $idCamposGrilla[5]?>" id="<?php echo $idCamposGrilla[5].'-idioma'?>"><?php echo $labelsGrillas[4] ?><font style="color: red;">(*)</font></label></td>
-                                    <td><input id="<?php echo $idCamposGrilla[5]?>" maxlength="10" style="width:150px;"  ></input></td>
-                                </tr>                                
-                                <tr>
-                                    <td><label for="<?php echo $idCamposGrilla[6]?>" id="<?php echo $idCamposGrilla[6].'-idioma'?>"><?php echo $labelsGrillas[5] ?><font style="color: red;">(*)</font></label></td>
-                                    <td><input id="<?php echo $idCamposGrilla[6]?>" maxlength="10" style="width:150px;"  ></input></td>
-                                </tr>                                                                
-                            </table>
-                        </div>
-                        <div id="contenedor-modal">
-                            <strong><font style="color: red;">(*)</font> Complete los campos marcados en el formulario para guardar el Registro</strong>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <a data-dismiss="modal" class="btn" href="#" id="cancelar-bot">Cancelar</a>
-                        <a class="btn btn-info" id="guardar-registro" href="#">Guardar</a>
-                    </div>
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+    <head>
+        <meta charset="UTF-8" />
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+        <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1-rc.1/css/select2.min.css" rel="stylesheet" />
+        <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1-rc.1/js/select2.min.js"></script>
+        <script type="text/javascript" src="<?php echo $this->baseUrl(). "/js/jquery.datetimepicker.js"?>"></script>
+        <script type="text/javascript" src="<?php echo $this->baseUrl(). "/js/jquery.datetimepicker.full.min.js"?>"></script>
+        <link rel="stylesheet" href="<?php echo $this->baseUrl(). "/css/jquery.datetimepicker.css"?>" />
+    </head>
+    <body>
+        <div class="">
+            <nav class="navbar navbar-default" role="navigation">
+                <!-- El logotipo y el icono que despliega el menú se agrupan
+                    para mostrarlos mejor en los dispositivos móviles -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Desplegar navegación</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Sistema Logo</a>
                 </div>
-
-                 <?php
-            echo $this->layout()->content;
-            ?>
-            </CENTER>
-        </body>
-    </html>
+                <!-- Agrupar los enlaces de navegación, los formularios y cualquier
+                    otro elemento que se pueda ocultar al minimizar la barra -->
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                    <li class="active">
+                            <a href="<?php echo $this->baseUrl(). "/index.php/administrativo/chofer"?>">Chofer</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo $this->baseUrl(). "/index.php/administrativo/camion"?>">Camión</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Menú #1 <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">Acción #1</a>
+                                </li>
+                                <li>
+                                    <a href="#">Acción #2</a>
+                                </li>
+                                <li>
+                                    <a href="#">Acción #3</a>
+                                </li>
+                                <li class="divider">
+                                </li>
+                                <li>
+                                    <a href="#">Acción #4</a>
+                                </li>
+                                <li class="divider">
+                                </li>
+                                <li>
+                                    <a href="#">Acción #5</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Enlace #3</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Menú #2 <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Acción #1</a></li>
+                                <li><a href="#">Acción #2</a></li>
+                                <li><a href="#">Acción #3</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Acción #4</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="">
+                
+                    <?php
+                        echo $this->layout()->content;
+                        ?>
+                
+            </div>
+            <!-- /content-wrap -->
+        </div>
+        <!-- /container -->
+        
+    </body>
+</html>
